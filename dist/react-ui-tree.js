@@ -88,6 +88,9 @@ module.exports = React.createClass({
     );
   },
   dragStart: function dragStart(id, dom, e) {
+    if (this.props.noDrag) {
+      return;
+    }
     this.dragging = {
       id: id,
       w: dom.offsetWidth,
@@ -105,6 +108,7 @@ module.exports = React.createClass({
     window.addEventListener('mousemove', this.drag);
     window.addEventListener('mouseup', this.dragEnd);
   },
+
 
   // oh
   drag: function drag(e) {

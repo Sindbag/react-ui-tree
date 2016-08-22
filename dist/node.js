@@ -14,7 +14,7 @@ var Node = React.createClass({
       var collapsed = index.node.collapsed;
 
       return React.createElement('span', {
-        className: cx('collapse', collapsed ? 'caret-right' : 'caret-down'),
+        className: cx('tree-collapse', collapsed ? 'caret-right' : 'caret-down'),
         onMouseDown: function onMouseDown(e) {
           e.stopPropagation();
         },
@@ -32,7 +32,6 @@ var Node = React.createClass({
 
     if (index.children && index.children.length) {
       var childrenStyles = {};
-      if (index.node.collapsed) childrenStyles.display = 'none';
       childrenStyles['paddingLeft'] = this.props.paddingLeft + 'px';
 
       return React.createElement(
@@ -73,7 +72,7 @@ var Node = React.createClass({
         this.renderCollapse(),
         tree.renderNode(node)
       ),
-      this.renderChildren()
+      node.collapsed ? null : this.renderChildren()
     );
   },
   handleCollapse: function handleCollapse(e) {
