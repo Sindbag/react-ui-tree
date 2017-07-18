@@ -90,6 +90,9 @@ module.exports = React.createClass({
     );
   },
   dragStart: function dragStart(id, dom, e) {
+    if (this.props.noDrag) {
+      return;
+    }
     this.dragging = {
       id: id,
       w: dom.offsetWidth,

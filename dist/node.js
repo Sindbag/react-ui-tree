@@ -37,7 +37,6 @@ var Node = React.createClass({
 
     if (index.children && index.children.length) {
       var childrenStyles = {};
-      if (index.node.collapsed) childrenStyles.display = 'none';
       childrenStyles['paddingLeft'] = this.props.paddingLeft + 'px';
 
       return React.createElement(
@@ -77,9 +76,9 @@ var Node = React.createClass({
         'div',
         { className: 'inner', ref: 'inner', onMouseDown: this.handleMouseDown },
         this.renderCollapse(),
-        tree.renderNode(node, index.id)
+        tree.renderNode(node, index.id, tree)
       ),
-      this.renderChildren()
+      node.collapsed ? null : this.renderChildren()
     );
   },
   handleCollapse: function handleCollapse(e) {
