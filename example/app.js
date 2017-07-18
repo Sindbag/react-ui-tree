@@ -58,7 +58,7 @@ var App = React.createClass({
         <div className="inspector">
           <button onClick={this.updateTree}>update tree</button>
           <pre>
-          {JSON.stringify(this.state.tree, null, '  ')}
+          {JSON.stringify(this.state.active, null, '  ')}
           </pre>
          </div>
       </div>
