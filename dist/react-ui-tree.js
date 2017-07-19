@@ -67,7 +67,8 @@ var UITree = function (_Component) {
           paddingLeft: this.props.paddingLeft,
           onDragStart: this.dragStart,
           onCollapse: this.toggleCollapse,
-          dragging: dragging && dragging.id
+          dragging: dragging && dragging.id,
+          renderCollapse: this.props.renderCollapse
         })
       );
     }
@@ -130,7 +131,8 @@ var _initialiseProps = function _initialiseProps() {
         _react2.default.createElement(_node2.default, {
           tree: tree,
           index: draggingIndex,
-          paddingLeft: _this2.props.paddingLeft
+          paddingLeft: _this2.props.paddingLeft,
+          renderCollapse: _this2.props.renderCollapse
         })
       );
     }
@@ -139,6 +141,9 @@ var _initialiseProps = function _initialiseProps() {
   };
 
   this.dragStart = function (id, dom, e) {
+    if (_this2.props.noDrag) {
+      return;
+    }
     _this2.dragging = {
       id: id,
       w: dom.offsetWidth,

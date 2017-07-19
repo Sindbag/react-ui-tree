@@ -33,27 +33,33 @@ var UITreeNode = function (_Component) {
     }
 
     return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = UITreeNode.__proto__ || Object.getPrototypeOf(UITreeNode)).call.apply(_ref, [this].concat(args))), _this), _this.renderCollapse = function () {
-      var index = _this.props.index;
+      var _this$props = _this.props,
+          index = _this$props.index,
+          renderCollapse = _this$props.renderCollapse;
+
 
       if (index.children && index.children.length) {
         var collapsed = index.node.collapsed;
 
 
-        return _react2.default.createElement('span', {
-          className: (0, _classnames2.default)('collapse', collapsed ? 'caret-right' : 'caret-down'),
-          onMouseDown: function onMouseDown(e) {
-            return e.stopPropagation();
+        return _react2.default.createElement(
+          'span',
+          {
+            onMouseDown: function onMouseDown(e) {
+              return e.stopPropagation();
+            },
+            onClick: _this.handleCollapse
           },
-          onClick: _this.handleCollapse
-        });
+          renderCollapse(collapsed)
+        );
       }
 
       return null;
     }, _this.renderChildren = function () {
-      var _this$props = _this.props,
-          index = _this$props.index,
-          tree = _this$props.tree,
-          dragging = _this$props.dragging;
+      var _this$props2 = _this.props,
+          index = _this$props2.index,
+          tree = _this$props2.tree,
+          dragging = _this$props2.dragging;
 
 
       if (index.children && index.children.length) {
@@ -122,7 +128,7 @@ var UITreeNode = function (_Component) {
           'div',
           { className: 'inner', ref: 'inner', onMouseDown: this.handleMouseDown },
           this.renderCollapse(),
-          tree.renderNode(node)
+          tree.renderNode(node, index.id, tree)
         ),
         node.collapsed ? null : this.renderChildren()
       );
