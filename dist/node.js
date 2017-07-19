@@ -21,45 +21,16 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var UITreeNode = function (_Component) {
   _inherits(UITreeNode, _Component);
 
-  function UITreeNode() {
-    var _ref;
-
-    var _temp, _this, _ret;
-
+  function UITreeNode(props) {
     _classCallCheck(this, UITreeNode);
 
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
+    var _this = _possibleConstructorReturn(this, (UITreeNode.__proto__ || Object.getPrototypeOf(UITreeNode)).call(this, props));
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = UITreeNode.__proto__ || Object.getPrototypeOf(UITreeNode)).call.apply(_ref, [this].concat(args))), _this), _this.renderCollapse = function () {
+    _this.renderChildren = function () {
       var _this$props = _this.props,
           index = _this$props.index,
-          renderCollapse = _this$props.renderCollapse;
-
-
-      if (index.children && index.children.length) {
-        var collapsed = index.node.collapsed;
-
-
-        return _react2.default.createElement(
-          'span',
-          {
-            onMouseDown: function onMouseDown(e) {
-              return e.stopPropagation();
-            },
-            onClick: _this.handleCollapse
-          },
-          renderCollapse(collapsed)
-        );
-      }
-
-      return null;
-    }, _this.renderChildren = function () {
-      var _this$props2 = _this.props,
-          index = _this$props2.index,
-          tree = _this$props2.tree,
-          dragging = _this$props2.dragging;
+          tree = _this$props.tree,
+          dragging = _this$props.dragging;
 
 
       if (index.children && index.children.length) {
@@ -88,30 +59,63 @@ var UITreeNode = function (_Component) {
       }
 
       return null;
-    }, _this.handleCollapse = function (e) {
+    };
+
+    _this.handleCollapse = function (e) {
       e.stopPropagation();
       var nodeId = _this.props.index.id;
 
       if (_this.props.onCollapse) {
         _this.props.onCollapse(nodeId);
       }
-    }, _this.handleMouseDown = function (e) {
+    };
+
+    _this.handleMouseDown = function (e) {
       var nodeId = _this.props.index.id;
       var dom = _this.refs.inner;
 
       if (_this.props.onDragStart) {
         _this.props.onDragStart(nodeId, dom, e);
       }
-    }, _temp), _possibleConstructorReturn(_this, _ret);
+    };
+
+    _this.handleCollapse = _this.handleCollapse.bind(_this);
+    return _this;
   }
 
   _createClass(UITreeNode, [{
+    key: 'renderCollapse',
+    value: function renderCollapse() {
+      var _props = this.props,
+          index = _props.index,
+          renderCollapse = _props.renderCollapse;
+
+
+      if (index.children && index.children.length) {
+        var collapsed = index.node.collapsed;
+
+
+        return _react2.default.createElement(
+          'span',
+          {
+            onMouseDown: function onMouseDown(e) {
+              return e.stopPropagation();
+            },
+            onClick: this.handleCollapse
+          },
+          renderCollapse(collapsed)
+        );
+      }
+
+      return null;
+    }
+  }, {
     key: 'render',
     value: function render() {
-      var _props = this.props,
-          tree = _props.tree,
-          index = _props.index,
-          dragging = _props.dragging;
+      var _props2 = this.props,
+          tree = _props2.tree,
+          index = _props2.index,
+          dragging = _props2.dragging;
       var node = index.node;
 
       var styles = {};

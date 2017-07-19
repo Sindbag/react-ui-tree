@@ -83,7 +83,8 @@ var UITree = function (_Component) {
 UITree.propTypes = {
   tree: _propTypes2.default.object.isRequired,
   paddingLeft: _propTypes2.default.number,
-  renderNode: _propTypes2.default.func.isRequired
+  renderNode: _propTypes2.default.func.isRequired,
+  noDrag: _propTypes2.default.bool
 };
 UITree.defaultProps = {
   paddingLeft: 20

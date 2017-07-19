@@ -37,8 +37,7 @@ class App extends Component {
     return (
       <span
         className={cx('collapse', collapsed ? 'caret-right' : 'caret-down')}
-        onMouseDown={function(e) {e.stopPropagation()}}
-        onClick={this.handleCollapse}>
+        onMouseDown={function(e) {e.stopPropagation()}}>
       </span>
     )
   }
